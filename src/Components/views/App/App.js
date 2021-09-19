@@ -1,6 +1,12 @@
-import { Swith, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link } from 'react-router-dom'
 import { Layout, Typography, Space } from 'antd';
 import Navbar from '../../organismes/Navbar';
+import Cryptocurrencies from '../Cryptocurrencies';
+import Exchanges from '../Exchanges';
+import News from '../News';
+import Homepage from '../Homepage';
+import CryptoDetails from '../CryptoDetails';
+import Footer from '../../organismes/Footer';
 
 import './App.css';
 
@@ -20,7 +26,7 @@ function App() {
               <Route exact path="/exchanges">
                 <Exchanges />
               </Route>
-              <Route exact path="/cryptocurrencies">
+              <Route exact path="/ryptocurrencies">
                 <Cryptocurrencies />
               </Route>
               <Route exact path="/crypto/:coinId">
@@ -33,9 +39,11 @@ function App() {
           </div>
         </Layout>
       </div>
-      <div className="footer">
-
-      </div>
+      <footer>
+        <div className="footer" >
+          <Footer />
+        </div>
+      </footer>
     </div>
   );
 }
