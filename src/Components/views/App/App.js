@@ -9,7 +9,9 @@ import CryptoDetails from '../CryptoDetails';
 import Footer from '../../organismes/Footer';
 
 import './App.css';
+
 /// End of Import's
+
 function App() {
   return (
     <div className="App">
