@@ -1,13 +1,17 @@
 import React from 'react';
+import News from '../News';
+import Cryptocurrencies from '../Cryptocurrencies';
 import millify from 'millify'
 import { Link } from 'react-router-dom'
 import { Typography, Row, Col, Statistic } from 'antd';
 import { useGetCryptosQuery } from '../../../services/cryptoApi';
 const { Title } = Typography;
 
+
+
 const Homepage = () => {
 
-    const { data, isFetching } = useGetCryptosQuery();
+    const { data, isFetching } = useGetCryptosQuery(10);
     const globalStats = data?.data?.stats
 
     // console.log(data);
@@ -25,6 +29,24 @@ const Homepage = () => {
                 <Col span={12}><Statistic title="Total 24h Volume" value={millify(globalStats.total24hVolume)} /></Col>
                 <Col span={12}><Statistic title="Total Markets" value={millify(globalStats.totalMarkets)} /></Col>
             </Row>
+            <div className="home-heading-container">
+                <Title level={2} className="home-title">
+                    Top 10 cryptocurrencies in the World
+                </Title>
+                <Title level={3} className="show-more">
+                    <Link to="/cryptocurrencies">Show More</Link>
+                </Title>
+            </div>
+            <Cryptocurrencies simplified />
+            <div className="home-heading-container">
+                <Title level={2} className="home-title">
+                    Latest crypto news
+                </Title>
+                <Title level={3} className="show-more">
+                    <Link to="/news">Show More</Link>
+                </Title>
+            </div>
+            <News simplified />
         </>
     );
 };
