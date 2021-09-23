@@ -40,12 +40,11 @@ function App() {
             </Switch>
           </div>
         </Layout>
-      </div>
-      <footer>
         <div className="footer" >
           <Footer />
         </div>
-      </footer>
+      </div>
+
     </div>
   );
 }
