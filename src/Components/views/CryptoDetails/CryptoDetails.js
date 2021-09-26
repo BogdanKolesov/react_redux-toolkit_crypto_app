@@ -18,14 +18,16 @@ const { Option } = Select
 const CryptoDetails = () => {
     const { coinId } = useParams()
 
-    const [timePeriod, setTimePeriod] = useState('7d');
+    const [timeperiod, setTimeperiod] = useState('7d');
     const { data, isFetching } = useGetCryptoDetailsQuery(coinId)
-    const { data: coinHistory } = useGetCryptoHistoryQuery(coinId, timePeriod)
+    const { data: coinHistory } = useGetCryptoHistoryQuery({ coinId, timeperiod })
 
     if (isFetching) return 'Loading...'
 
     const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
     const cryptoDetails = data?.data?.coin;
+
+    console.log(coinHistory);
 
 
     const stats = [
@@ -61,11 +63,11 @@ const CryptoDetails = () => {
                 defaultValue="7d"
                 className="select-timeperiod"
                 placeholder="Select time period"
-                onChange={(value) => setTimePeriod(value)}
+                onChange={(value) => setTimeperiod(value)}
             >
                 {time.map((date) => <Option key={date}>{date}</Option>)}
             </Select>
-            {/* <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} /> */}
+            <LineChart coinHistory={coinHistory} currentPrice={millify(cryptoDetails.price)} coinName={cryptoDetails.name} />
             <Col className="stats-container">
                 <Col className="coin-value-statistics">
                     <Col className="coin-value-statistics-heading">
