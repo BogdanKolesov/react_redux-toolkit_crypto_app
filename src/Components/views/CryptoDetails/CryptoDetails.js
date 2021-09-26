@@ -10,6 +10,7 @@ import { useGetCryptoDetailsQuery } from '../../../services/cryptoApi'
 const { Title, Text } = Typography
 const { Option } = Select
 
+
 const CryptoDetails = () => {
     const { coinId } = useParams()
 
@@ -18,8 +19,8 @@ const CryptoDetails = () => {
 
 
     const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
-
     const cryptoDetails = data?.data?.coin;
+
 
     const stats = [
         { title: 'Price to USD', value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`, icon: <DollarCircleOutlined /> },
@@ -40,15 +41,13 @@ const CryptoDetails = () => {
 
     return (
 
-
-        // TODO: Details
         <Col className="coin-detail-container">
             <Col className="coin-heading-container">
                 <Title level={2} className="coin-name">
-                    {data?.data?.coin.name} ({data?.data?.coin.slug}) Price
+                    {cryptoDetails.name} ({cryptoDetails.slug}) Price
                 </Title>
                 <p>
-                    {data?.data?.coin.name} live price in US dollars.
+                    {cryptoDetails.name} live price in US dollars.
                     View value statistics, market cap and supply.
                 </p>
             </Col>
@@ -65,12 +64,63 @@ const CryptoDetails = () => {
                 <Col className="coin-value-statistics">
                     <Col className="coin-value-statistics-heading">
                         <Title level={3} className="coin-details-heading">
-                            {data?.data?.coin.name} Value statistics
+                            {cryptoDetails.name} Value statistics
                         </Title>
                         <p>
-                            An overview showing the stats of {data?.data?.coin.name}
+                            An overview showing the stats of {cryptoDetails.name}
                         </p>
                     </Col>
+                    {stats.map(({ icon, title, value }) => {
+                        <Col className="coins-stats">
+                            <Col className="coin-stats-name">
+                                <Text>{icon}</Text>
+                                <Text>{title}</Text>
+                            </Col>
+                            <Text className="stats">{value}</Text>
+                        </Col>
+                    })}
+                </Col>
+                <Col className="other-stats-info">
+                    <Col className="coin-value-statistics-heading">
+                        <Title level={3} className="coin-details-heading">
+                            Other Statistics
+                        </Title>
+                        <p>
+                            An overview showing the stats of all cryptocurrencies
+                        </p>
+                    </Col>
+                    {stats.map(({ icon, title, value }) => {
+                        <Col className="coins-stats">
+                            <Col className="coin-stats-name">
+                                <Text>{icon}</Text>
+                                <Text>{title}</Text>
+                            </Col>
+                            <Text className="stats">{value}</Text>
+                        </Col>
+                    })}
+                </Col>
+            </Col>
+            <Col className="coin-desc-link">
+                <Row className="coin-desc">
+                    <Title level={3} className="coin-details-heading">
+                        What is {cryptoDetails.name}?
+                        {HTMLReactParser(cryptoDetails.description)}
+                    </Title>
+                </Row>
+                <Col className="coin-links">
+                    <Title level={3} classname="coin-details-heading">
+                        {CryptoDetails.name} links
+                    </Title>
+                    {cryptoDetails.links.map((link) => (
+                        <Row className="coin-link" key={link.name}>
+                            <Title level={5} className="link-name">
+                                {link.type}
+                            </Title>
+                            <a href={link.url} target="_blank" rel="noreferrer">
+                                {link.name}
+                            </a>
+                        </Row>
+                    ))}
                 </Col>
             </Col>
         </Col>
