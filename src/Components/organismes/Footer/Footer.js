@@ -7,7 +7,7 @@ const Footer = () => {
         <>
             <Typography.Title level={5} style={{ color: 'white', textAlign: 'center' }}>
                 Crypto App <br />
-                Created by Bogdan Kolesov in 2021 year
+                Created by Bogdan Kolesov, 2021 year
             </Typography.Title>
             <Space>
                 <Link to="/">Home</Link>
