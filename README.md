@@ -1,1 +1,1 @@
-# Reaxt Redux test app
+# React Redux test app
